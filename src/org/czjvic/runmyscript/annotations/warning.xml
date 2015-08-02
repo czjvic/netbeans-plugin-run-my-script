@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE type PUBLIC
+          "-//NetBeans//DTD annotation type 1.0//EN"
+          "http://www.netbeans.org/dtds/annotation-type-1_0.dtd">
+<type name="org-czjvic-runmyscript-warning"
+      description_key="LBL_some-annotation"
+      localizing_bundle="org.nb.modules.foo.Bundle"
+      visible="true" 
+      glyph="nbresloc:/org/nb/modules/foo/some-annotation-glyph.gif"
+      highlight="#FFFF00"
+      type="line"/>

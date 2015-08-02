@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE type PUBLIC
+          "-//NetBeans//DTD annotation type 1.0//EN"
+          "http://www.netbeans.org/dtds/annotation-type-1_0.dtd"> 
+<type name="org-czjvic-runmyscript-error"      
+      visible="true"       
+      highlight="#FF0000"
+      type="line"/>  

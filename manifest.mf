@@ -4,4 +4,5 @@ OpenIDE-Module: org.czjvic.runmyscript/0
 OpenIDE-Module-Implementation-Version: 1
 OpenIDE-Module-Localizing-Bundle: org/czjvic/runmyscript/Bundle.properties
 OpenIDE-Module-Requires: org.openide.windows.IOProvider
+OpenIDE-Module-Layer: org/czjvic/runmyscript/layer.xml
 
