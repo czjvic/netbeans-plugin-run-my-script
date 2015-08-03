@@ -5,11 +5,7 @@
  */
 package org.czjvic.runmyscript;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.util.Scanner;
 import org.openide.util.NbPreferences;
 import org.openide.windows.IOProvider;
@@ -48,6 +44,7 @@ public class Command implements Runnable {
         String enviromentVariable = NbPreferences.forModule(RunMyScriptPanel.class).get("enviroment", "");
         String[] env = {enviromentVariable};
 
+        //run process
         try {
             Process process = Runtime.getRuntime().exec(this.cmd, env);
             inheritIO(process.getInputStream(), process.getErrorStream(), outputWindow.getOut());
@@ -69,9 +66,14 @@ public class Command implements Runnable {
     private static void inheritIO(final InputStream outputStream, final InputStream errorStream, final OutputWriter dest) {
         new Thread(new Runnable() {
             public void run() {
+
+                StringBuilder sb = new StringBuilder();
+
                 Scanner sc = new Scanner(outputStream);
                 while (sc.hasNextLine()) {
-                    dest.println(sc.nextLine());
+                    String line = sc.nextLine();
+                    sb.append(line);
+                    dest.println(line);
                 }
 
                 sc = new Scanner(errorStream);
@@ -79,6 +81,16 @@ public class Command implements Runnable {
                     dest.println(sc.nextLine());
                 }
                 dest.println("Command successful finished.");
+
+                try {
+                    //if xml parsing enabled, try to parse
+                    if (NbPreferences.forModule(RunMyScriptPanel.class).getBoolean("parseXml", false)) {
+                        OutputProcessor op = new OutputProcessor(sb.toString().trim());
+                    }
+                } catch (Exception ex) {
+                    dest.println("XML parse failed. Exception message: " + ex.getMessage());
+                }
+
             }
         }).start();
     }

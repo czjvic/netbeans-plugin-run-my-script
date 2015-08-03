@@ -33,10 +33,16 @@ public class Utils {
      *
      * @throws DataObjectNotFoundException
      */
-    public static void addAnotation(int lineNumber, String message, boolean isError) throws DataObjectNotFoundException {
+    public static void addAnotation(int lineNumber, String message, boolean isError) {
         FileObject currentFile = getCurrentFile();
 
-        DataObject objWithError = DataObject.find(currentFile);
+        DataObject objWithError = null;
+        try {
+            objWithError = DataObject.find(currentFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
 
         LineCookie cookie = (LineCookie) objWithError.getLookup().lookup(LineCookie.class);
 
@@ -62,8 +68,6 @@ public class Utils {
             }
         });
     }
-
-
 
     /**
      * Return currently opened file.
