@@ -34,6 +34,9 @@ final class RunMyScriptPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        chbFieldParseXml = new javax.swing.JCheckBox();
+        chbFieldShowWindow = new javax.swing.JCheckBox();
 
         txtFieldPath.setText(org.openide.util.NbBundle.getMessage(RunMyScriptPanel.class, "RunMyScriptPanel.text")); // NOI18N
         txtFieldPath.setName(""); // NOI18N
@@ -59,31 +62,50 @@ final class RunMyScriptPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel7, org.openide.util.NbBundle.getMessage(RunMyScriptPanel.class, "RunMyScriptPanel.jLabel7.text")); // NOI18N
 
+        org.openide.awt.Mnemonics.setLocalizedText(chbFieldParseXml, org.openide.util.NbBundle.getMessage(RunMyScriptPanel.class, "RunMyScriptPanel.chbFieldParseXml.text")); // NOI18N
+        chbFieldParseXml.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbFieldParseXmlActionPerformed(evt);
+            }
+        });
+
+        chbFieldShowWindow.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(chbFieldShowWindow, org.openide.util.NbBundle.getMessage(RunMyScriptPanel.class, "RunMyScriptPanel.chbFieldShowWindow.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
-                            .addComponent(txtFieldPath, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFieldEnviroment)
+                            .addComponent(jSeparator1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtFieldPath, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(txtFieldEnviroment)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel7))
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chbFieldShowWindow)
+                            .addComponent(chbFieldParseXml))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -107,7 +129,13 @@ final class RunMyScriptPanel extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chbFieldShowWindow)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chbFieldParseXml)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -115,21 +143,31 @@ final class RunMyScriptPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFieldPathActionPerformed
 
-    void load() {       
-        txtFieldPath.setText(NbPreferences.forModule(RunMyScriptPanel.class).get("path", ""));        
+    private void chbFieldParseXmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbFieldParseXmlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbFieldParseXmlActionPerformed
+
+    void load() {
+        txtFieldPath.setText(NbPreferences.forModule(RunMyScriptPanel.class).get("path", ""));
         txtFieldEnviroment.setText(NbPreferences.forModule(RunMyScriptPanel.class).get("enviroment", ""));
+        chbFieldParseXml.setSelected(NbPreferences.forModule(RunMyScriptPanel.class).getBoolean("parseXml", false));
+        chbFieldShowWindow.setSelected(NbPreferences.forModule(RunMyScriptPanel.class).getBoolean("showWindow", true));
     }
 
     void store() {
         NbPreferences.forModule(RunMyScriptPanel.class).put("path", txtFieldPath.getText());
         NbPreferences.forModule(RunMyScriptPanel.class).put("enviroment", txtFieldEnviroment.getText());
+        NbPreferences.forModule(RunMyScriptPanel.class).putBoolean("parseXml", chbFieldParseXml.isSelected());
+        NbPreferences.forModule(RunMyScriptPanel.class).putBoolean("showWindow", chbFieldShowWindow.isSelected());
     }
 
-    boolean valid() {        
+    boolean valid() {
         return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chbFieldParseXml;
+    private javax.swing.JCheckBox chbFieldShowWindow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -137,6 +175,7 @@ final class RunMyScriptPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtFieldEnviroment;
     private javax.swing.JTextField txtFieldPath;
     // End of variables declaration//GEN-END:variables
