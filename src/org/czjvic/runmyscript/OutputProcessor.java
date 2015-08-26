@@ -20,19 +20,12 @@ import org.xml.sax.InputSource;
  */
 public class OutputProcessor {
 
-    public OutputProcessor(String result) {
-        try {
-
-            DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            System.out.println(result);
-            Document doc = dBuilder.parse(new InputSource(new StringReader(result)));
-            if (doc.hasChildNodes()) {
-                printNote(doc.getChildNodes());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+    public OutputProcessor(String result) throws Exception {
+        DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        System.out.println(result);
+        Document doc = dBuilder.parse(new InputSource(new StringReader(result)));
+        if (doc.hasChildNodes()) {
+            printNote(doc.getChildNodes());
         }
     }
 
@@ -68,7 +61,7 @@ public class OutputProcessor {
                             isError = node.getNodeValue().equals("error");
                         }
                     }
-                    message = "Line: " + line +", column: " + column + " - " + message;
+                    message = "Line: " + line + ", column: " + column + " - " + message;
                     Utils.addAnotation(line, message, isError);
                 }
 

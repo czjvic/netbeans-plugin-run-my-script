@@ -5,7 +5,7 @@
 <type name="org-czjvic-runmyscript-warning"
       description_key="LBL_some-annotation"
       localizing_bundle="org.nb.modules.foo.Bundle"
-      visible="true" 
-      glyph="nbresloc:/org/nb/modules/foo/some-annotation-glyph.gif"
+      visible="true"       
       highlight="#FFFF00"
       type="line"/>
+<!--      glyph="nbresloc:/org/netbeans/modules/java/resources/warning-glyph.gif"-->
