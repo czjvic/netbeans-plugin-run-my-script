@@ -47,7 +47,7 @@ public class Utils {
         LineCookie cookie = (LineCookie) objWithError.getLookup().lookup(LineCookie.class);
 
         Line.Set lineSet = cookie.getLineSet();
-        final Line line = lineSet.getOriginal(lineNumber);
+        final Line line = lineSet.getOriginal(lineNumber - 1);
 
         final Annotation ann;
         if (isError) {
@@ -57,6 +57,8 @@ public class Utils {
         }
 
         ann.attach(line);
+        
+        //remove property, when line text is changed
         line.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent ev) {
                 String type = ev.getPropertyName();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.czjvic.runmyscript;
 
 import java.io.StringReader;
@@ -15,21 +10,36 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
- *
+ * Process XML output for CHECKSTYLE format
+ * 
  * @author josefvrba
  */
 public class OutputProcessor {
 
+    /**
+     * XML content
+     * 
+     * @param result
+     * 
+     * @throws Exception 
+     */
     public OutputProcessor(String result) throws Exception {
         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         System.out.println(result);
         Document doc = dBuilder.parse(new InputSource(new StringReader(result)));
         if (doc.hasChildNodes()) {
-            printNote(doc.getChildNodes());
+            this.printNote(doc.getChildNodes());
         }
     }
 
-    private static void printNote(NodeList nodeList) {
+    /**
+     * Add annotation
+     *
+     * @param nodeList 
+     * 
+     * @return void
+     */
+    private void printNote(NodeList nodeList) {
 
         for (int count = 0; count < nodeList.getLength(); count++) {
 
@@ -38,6 +48,7 @@ public class OutputProcessor {
             // make sure it's element node.
             if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
 
+                //all elemenets are called "error"
                 if (tempNode.hasAttributes() && tempNode.getNodeName().equals("error")) {
 
                     // get attributes names and values
@@ -66,14 +77,10 @@ public class OutputProcessor {
                 }
 
                 if (tempNode.hasChildNodes()) {
-
                     // loop again if has child nodes
                     printNote(tempNode.getChildNodes());
                 }
             }
-
         }
-
     }
-
 }
