@@ -5,10 +5,14 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import org.netbeans.api.project.FileOwnerQuery;
+import org.netbeans.api.project.Project;
+import org.netbeans.api.project.ProjectUtils;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
+import org.openide.filesystems.FileObject;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.IOProvider;
 import org.openide.windows.TopComponent;
@@ -35,15 +39,48 @@ public final class RunMyScriptAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         TopComponent activeTC = TopComponent.getRegistry().getActivated();
-        DataObject dataLookup = activeTC.getLookup().lookup(DataObject.class);
-        String currentFilePath = FileUtil.toFile(dataLookup.getPrimaryFile()).getAbsolutePath();
 
-        String scriptPath = NbPreferences.forModule(RunMyScriptPanel.class).get("path", "");
-        String cmd = scriptPath.replace("$CURRENT_FILE$", currentFilePath);
+        String currentFilePath = "";
+        try {            
+            DataObject dataLookup = activeTC.getLookup().lookup(DataObject.class);
+            currentFilePath = FileUtil.toFile(dataLookup.getPrimaryFile()).getAbsolutePath();
+        } catch (Exception ex) {
+            currentFilePath = "";
+            ex.printStackTrace();            
+        }
+        
+        String projectName = "";
+        try {            
+            FileObject fileObject = activeTC.getLookup().lookup(FileObject.class);
+            projectName = ProjectUtils.getInformation(FileOwnerQuery.getOwner(fileObject)).getDisplayName();
+        } catch (Exception ex) {
+            projectName = "";
+            ex.printStackTrace();            
+        }
+        
+        String projectDirectory = "";
+        try {            
+            FileObject fileObject = activeTC.getLookup().lookup(FileObject.class);
+            Project project = ProjectUtils.getInformation(FileOwnerQuery.getOwner(fileObject)).getProject();
+            FileObject projectDirectoryObj = project.getProjectDirectory();
+	    projectDirectory = projectDirectoryObj.getPath();
+        } catch (Exception ex) {
+            projectDirectory = "";
+            ex.printStackTrace();            
+        }        
+
+        String cmd = NbPreferences.forModule(RunMyScriptPanel.class).get("path", "");        
+        cmd = cmd.replace("$CURRENT_FILE$", currentFilePath);
+        cmd = cmd.replace("$CURRENT_PROJECT_NAME$", projectName);
+        cmd = cmd.replace("$CURRENT_PROJECT_DIRECTORY$", projectDirectory);
 
         InputOutput outputWindow = IOProvider.getDefault().getIO("Run My Script", false);
         outputWindow.closeInputOutput();        
         outputWindow = IOProvider.getDefault().getIO("Run My Script", true);
+        
+        if (cmd.equals("")) {
+            return;
+        }
         
         outputWindow.getOut().println("Starting command: " + cmd);
         outputWindow.select();
